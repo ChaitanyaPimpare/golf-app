@@ -109,3 +109,44 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+.auth-container {
+  display: flex;
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+.auth-left {
+  flex: 1;
+  background: linear-gradient(135deg, #fbbf24, #6366f1);
+}
+
+.auth-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+}
+
+.auth-card h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.auth-card input {
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+}
+
+.auth-card button {
+  padding: 12px;
+  margin-top: 10px;
+  background: black;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}

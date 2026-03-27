@@ -3,27 +3,35 @@ import { supabase } from "../supabase"
 import { useNavigate, Link } from "react-router-dom"
 import "./auth.css"
 
-function Login() {
+function Signup() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate()
 
-  const handleLogin = async () => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
+  const handleSignup = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: email.trim(),
       password,
     })
 
     if (error) return alert(error.message)
 
-    navigate("/dashboard")
+    if (data.user) {
+      await supabase.from("profiles").insert({
+        id: data.user.id,
+        email: data.user.email,
+      })
+    }
+
+    alert("Signup successful 🎉")
+    navigate("/login")
   }
 
   return (
     <div className="auth-wrapper">
       <div className="auth-box">
-        <h2>Login</h2>
-        <p>Hello! Let's get started</p>
+        <h2>Signup</h2>
+        <p>Create your account</p>
 
         <input
           type="email"
@@ -39,14 +47,14 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button onClick={handleLogin}>Login</button>
+        <button onClick={handleSignup}>Signup</button>
 
         <p className="switch">
-          Don’t have an account? <Link to="/signup">Signup</Link>
+          Already have an account? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>
   )
 }
 
-export default Login
+export default Signup

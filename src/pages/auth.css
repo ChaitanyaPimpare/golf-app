@@ -1,0 +1,70 @@
+/* FULL BACKGROUND */
+.auth-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #7c3aed, #60a5fa);
+  font-family: "Poppins", sans-serif;
+}
+
+/* CARD */
+.auth-box {
+  width: 320px;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* TEXT */
+.auth-box h2 {
+  margin-bottom: 5px;
+  color: white;
+}
+
+.auth-box p {
+  color: #ddd;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* INPUT */
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+/* BUTTON */
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, #6366f1, #3b82f6);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-box button:hover {
+  opacity: 0.9;
+}
+
+/* SWITCH TEXT */
+.switch {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.switch a {
+  color: #fff;
+  font-weight: bold;
+}

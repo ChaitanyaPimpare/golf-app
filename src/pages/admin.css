@@ -1,0 +1,58 @@
+.admin {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  color: white;
+  padding: 30px;
+  font-family: "Inter", sans-serif;
+}
+
+.admin-header {
+  margin-bottom: 20px;
+}
+
+.admin-header p {
+  color: #94a3b8;
+}
+
+/* CARD */
+.card {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+/* BUTTON GROUP */
+.btn-group {
+  margin-bottom: 15px;
+}
+
+.btn-group button {
+  margin-right: 10px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #3b82f6;
+  color: white;
+}
+
+/* NUMBERS */
+.numbers {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #38bdf8;
+}
+
+/* LIST */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #1e293b;
+}

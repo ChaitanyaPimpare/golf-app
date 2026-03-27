@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../supabase"
 import { useNavigate } from "react-router-dom"
+import {
+  FaChartBar,
+  FaMoneyBill,
+  FaTrophy,
+  FaSignOutAlt
+} from "react-icons/fa"
+import "./dashboard.css"
 
 function Dashboard() {
   const [user, setUser] = useState(null)
@@ -13,7 +20,6 @@ function Dashboard() {
     loadUser()
   }, [])
 
-  // ================= USER =================
   const loadUser = async () => {
     const { data } = await supabase.auth.getUser()
 
@@ -23,12 +29,10 @@ function Dashboard() {
     }
 
     setUser(data.user)
-
     fetchScores(data.user.id)
     fetchWinnings(data.user.id)
   }
 
-  // ================= FETCH SCORES =================
   const fetchScores = async (userId) => {
     const { data } = await supabase
       .from("scores")
@@ -39,7 +43,6 @@ function Dashboard() {
     setScores(data || [])
   }
 
-  // ================= FETCH WINNINGS =================
   const fetchWinnings = async (userId) => {
     const { data } = await supabase
       .from("winnings")
@@ -49,7 +52,6 @@ function Dashboard() {
     setWinnings(data || [])
   }
 
-  // ================= ADD SCORE =================
   const addScore = async () => {
     if (!newScore) return alert("Enter score")
 
@@ -80,51 +82,113 @@ function Dashboard() {
     fetchScores(user.id)
   }
 
-  if (!user) return <h2 style={{ padding: "30px" }}>Loading...</h2>
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    navigate("/login")
+  }
+
+  if (!user) return <h2 className="loading">Loading...</h2>
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h2>Dashboard</h2>
+    <div className="layout">
 
-      <p>User: {user.email}</p>
+      {/* SIDEBAR */}
+      <div className="sidebar">
+        <h2 className="logo">⛳ Golf</h2>
 
-      {/* ================= ADD SCORE ================= */}
-      <h3>Add Score</h3>
-      <input
-        type="number"
-        value={newScore}
-        onChange={(e) => setNewScore(e.target.value)}
-        placeholder="1-45"
-      />
-      <button onClick={addScore}>Add</button>
-
-      {/* ================= SCORES ================= */}
-      <h3>Your Scores</h3>
-      {scores.length === 0 ? (
-        <p>No scores yet</p>
-      ) : (
         <ul>
-          {scores.map((s) => (
-            <li key={s.id}>
-              {s.score} ({new Date(s.date).toLocaleDateString()})
-            </li>
-          ))}
+          <li className="active"><FaChartBar /> Dashboard</li>
+          <li><FaTrophy /> Scores</li>
+          <li><FaMoneyBill /> Winnings</li>
         </ul>
-      )}
+      </div>
 
-      {/* ================= WINNINGS ================= */}
-      <h3>Your Winnings</h3>
-      {winnings.length === 0 ? (
-        <p>No winnings yet</p>
-      ) : (
-        <ul>
-          {winnings.map((w) => (
-            <li key={w.id}>
-              Match: {w.match} | ₹{w.amount} | {w.status}
-            </li>
-          ))}
-        </ul>
-      )}
+      {/* MAIN */}
+      <div className="main">
+
+        {/* NAVBAR */}
+        <div className="navbar">
+          <input className="search" placeholder="Search..." />
+
+          <div className="nav-right">
+            <span>{user.email}</span>
+            <button onClick={handleLogout}>
+              <FaSignOutAlt />
+            </button>
+          </div>
+        </div>
+
+        {/* CONTENT */}
+        <div className="content">
+
+          {/* STATS */}
+          <div className="stats">
+            <div className="card">
+              <h4>Total Scores</h4>
+              <p>{scores.length}</p>
+            </div>
+
+            <div className="card">
+              <h4>Total Winnings</h4>
+              <p>₹{winnings.reduce((s, w) => s + w.amount, 0)}</p>
+            </div>
+
+            <div className="card">
+              <h4>Last Score</h4>
+              <p>{scores[0]?.score || "-"}</p>
+            </div>
+          </div>
+
+          {/* ADD SCORE */}
+          <div className="card">
+            <h3>Add Score</h3>
+            <div className="input-group">
+              <input
+                type="number"
+                value={newScore}
+                onChange={(e) => setNewScore(e.target.value)}
+                placeholder="1-45"
+              />
+              <button onClick={addScore}>Add</button>
+            </div>
+          </div>
+
+          {/* SCORES */}
+          <div className="card">
+            <h3>Recent Scores</h3>
+            {scores.length === 0 ? (
+              <p>No scores</p>
+            ) : (
+              <ul>
+                {scores.map((s) => (
+                  <li key={s.id}>
+                    {s.score}
+                    <span>{new Date(s.date).toLocaleDateString()}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* WINNINGS */}
+          <div className="card">
+            <h3>Winnings</h3>
+            {winnings.length === 0 ? (
+              <p>No winnings</p>
+            ) : (
+              <ul>
+                {winnings.map((w) => (
+                  <li key={w.id}>
+                    Match {w.match}
+                    <span>₹{w.amount}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+        </div>
+      </div>
     </div>
   )
 }

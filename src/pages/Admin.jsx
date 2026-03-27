@@ -1,9 +1,33 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { supabase } from "../supabase"
+import { useNavigate } from "react-router-dom"
+import "./admin.css"
 
 function Admin() {
   const [drawNumbers, setDrawNumbers] = useState([])
   const [winners, setWinners] = useState([])
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+
+  // ================= CHECK ADMIN =================
+  useEffect(() => {
+    checkAdmin()
+  }, [])
+
+  const checkAdmin = async () => {
+    const { data } = await supabase.auth.getUser()
+
+    if (!data?.user) {
+      navigate("/login")
+      return
+    }
+
+    // 🔒 SIMPLE ADMIN CHECK
+    if (data.user.email !== "admin@gmail.com") {
+      alert("Access denied 🚫")
+      navigate("/dashboard")
+    }
+  }
 
   // ================= GENERATE DRAW =================
   const generateDraw = () => {
@@ -23,9 +47,13 @@ function Admin() {
       return alert("Generate draw first")
     }
 
+    setLoading(true)
+
     const { error } = await supabase.from("draws").insert({
       numbers: drawNumbers
     })
+
+    setLoading(false)
 
     if (error) return alert("Error saving draw")
 
@@ -43,11 +71,16 @@ function Admin() {
       return alert("Generate draw first")
     }
 
+    setLoading(true)
+
     const { data: scores, error } = await supabase
       .from("scores")
       .select("*")
 
-    if (error) return alert("Error fetching scores")
+    if (error) {
+      setLoading(false)
+      return alert("Error fetching scores")
+    }
 
     const userScoresMap = {}
 
@@ -72,7 +105,7 @@ function Admin() {
       }
     }
 
-    // ✅ SAVE WINNERS TO DB
+    // SAVE WINNERS
     for (let w of winnersList) {
       await supabase.from("winnings").insert({
         user_id: w.user_id,
@@ -82,36 +115,57 @@ function Admin() {
     }
 
     setWinners(winnersList)
+    setLoading(false)
+
     alert("Draw executed + Winners saved ✅")
   }
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h2>Admin Panel</h2>
+    <div className="admin">
+      
+      {/* HEADER */}
+      <div className="admin-header">
+        <h2>Admin Panel ⚡</h2>
+        <p>Manage draw system</p>
+      </div>
 
-      <button onClick={generateDraw}>Generate Draw</button>
+      {/* ACTIONS */}
+      <div className="card">
+        <h3>Draw Controls</h3>
 
-      <h3>Numbers: {drawNumbers.join(", ")}</h3>
+        <div className="btn-group">
+          <button onClick={generateDraw}>🎯 Generate</button>
+          <button onClick={saveDraw}>💾 Save</button>
+          <button onClick={runDraw}>🚀 Run</button>
+        </div>
 
-      <button onClick={saveDraw}>Save Draw</button>
+        <div className="numbers">
+          {drawNumbers.length > 0
+            ? drawNumbers.join(" , ")
+            : "No draw generated"}
+        </div>
+      </div>
 
-      <br /><br />
+      {/* LOADING */}
+      {loading && <p>Processing...</p>}
 
-      <button onClick={runDraw}>Run Draw</button>
+      {/* WINNERS */}
+      <div className="card">
+        <h3>Winners</h3>
 
-      <h3>Winners</h3>
-
-      {winners.length === 0 ? (
-        <p>No winners yet</p>
-      ) : (
-        <ul>
-          {winners.map((w, i) => (
-            <li key={i}>
-              User: {w.user_id} | Match: {w.match}
-            </li>
-          ))}
-        </ul>
-      )}
+        {winners.length === 0 ? (
+          <p>No winners yet</p>
+        ) : (
+          <ul>
+            {winners.map((w, i) => (
+              <li key={i}>
+                <span>{w.user_id}</span>
+                <b>Match: {w.match}</b>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   )
 }
