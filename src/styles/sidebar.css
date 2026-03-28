@@ -1,0 +1,135 @@
+/* GLOBAL FONT */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* SIDEBAR BASE */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background: #f8fafc; /* soft grey like SaaS */
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+/* COLLAPSED */
+.sidebar.collapsed {
+  width: 80px;
+}
+
+/* HEADER */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.sidebar-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #302c2c;
+}
+
+/* COLLAPSED HEADER */
+.sidebar.collapsed .sidebar-header {
+  justify-content: center;
+}
+
+.sidebar.collapsed .sidebar-header h2 {
+  display: none;
+}
+
+/* TOGGLE BUTTON */
+.toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #374151;
+}
+
+/* MENU */
+.menu {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* MENU ITEM */
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 12px; /* smooth rounded */
+  cursor: pointer;
+  color: #aab5c6;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+/* HOVER */
+.menu-item:hover {
+  background: #eef2f7;
+}
+
+/* ACTIVE (KEY DESIGN PART) */
+.menu-item.active {
+  background: #e0e7ff;
+  color: #4f46e5;
+  font-weight: 500;
+}
+
+/* ICON */
+.icon {
+  font-size: 18px;
+  min-width: 20px;
+}
+
+/* LABEL */
+.label {
+  white-space: nowrap;
+}
+
+/* COLLAPSED MENU */
+.sidebar.collapsed .menu-item {
+  justify-content: center;
+  padding: 14px 0;
+}
+
+.sidebar.collapsed .label {
+  display: none;
+}
+
+/* LOGOUT */
+.logout-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-top: 1px solid #e5e7eb;
+  cursor: pointer;
+  color: #ef4444;
+  border-radius: 10px;
+  margin: 10px;
+  transition: all 0.2s ease;
+}
+
+.logout-section:hover {
+  background: #fee2e2;
+}
+
+/* COLLAPSED LOGOUT */
+.sidebar.collapsed .logout-section {
+  justify-content: center;
+  padding: 14px 0;
+}
+
+.sidebar.collapsed .logout-section span {
+  display: none;
+}

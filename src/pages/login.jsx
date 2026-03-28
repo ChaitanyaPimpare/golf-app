@@ -1,29 +1,55 @@
 import { useState } from "react"
 import { supabase } from "../supabase"
 import { useNavigate, Link } from "react-router-dom"
+import { getUserProfile } from "../utils/getUserRole"
 import "./auth.css"
 
 function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+
   const navigate = useNavigate()
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      return alert("Please enter email and password")
+    }
+
+    setLoading(true)
+
     const { error } = await supabase.auth.signInWithPassword({
-      email,
+      email: email.trim(),
       password,
     })
 
-    if (error) return alert(error.message)
+    if (error) {
+      setLoading(false)
+      return alert(error.message)
+    }
 
-    navigate("/dashboard")
+    // 🔥 FETCH USER ROLE
+    const profile = await getUserProfile()
+
+    setLoading(false)
+
+    if (!profile) {
+      return alert("User profile not found")
+    }
+
+    // 🚀 ROLE-BASED REDIRECT
+    if (profile.role === "super_admin") {
+      navigate("/admin")
+    } else {
+      navigate("/dashboard")
+    }
   }
 
   return (
     <div className="auth-wrapper">
       <div className="auth-box">
-        <h2>Login</h2>
-        <p>Hello! Let's get started</p>
+        <h2>Welcome Back 👋</h2>
+        <p>Login to continue</p>
 
         <input
           type="email"
@@ -39,7 +65,9 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button onClick={handleLogin}>Login</button>
+        <button onClick={handleLogin} disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
+        </button>
 
         <p className="switch">
           Don’t have an account? <Link to="/signup">Signup</Link>

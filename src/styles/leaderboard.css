@@ -1,0 +1,90 @@
+/* TOP 3 SECTION */
+.top3 {
+  display: flex;
+  gap: 16px;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+/* CARD */
+.top-card {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  border-radius: 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  transition: 0.3s;
+}
+
+.top-card:hover {
+  transform: translateY(-4px);
+}
+
+/* RANK COLORS */
+.rank-0 {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+}
+
+.rank-1 {
+  background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+}
+
+.rank-2 {
+  background: linear-gradient(135deg, #fcd34d, #fbbf24);
+}
+
+/* RANK TEXT */
+.rank {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* AVATAR */
+.avatar {
+  width: 50px;
+  height: 50px;
+  margin: 10px auto;
+  border-radius: 50%;
+  background: #4f46e5;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* EMAIL */
+.email {
+  font-size: 13px;
+  color: #374151;
+}
+
+/* SCORE */
+.top-card h3 {
+  margin-top: 8px;
+  font-size: 20px;
+}
+
+/* LIST */
+.list-container {
+  margin-top: 10px;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+  background: #f9fafb;
+  border: 1px solid #f1f5f9;
+}
+
+/* LOADING */
+.loading {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
