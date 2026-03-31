@@ -1,16 +1,66 @@
-# React + Vite
+# 🏌️‍♂️ Golf Performance & Draw Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 **Live App:** https://golf-app-re84.vercel.app/
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 Overview
 
-## React Compiler
+This platform is a **subscription-driven web application** that combines:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🏌️ Golf performance tracking  
+- 🎁 Monthly draw-based reward system  
+- ❤️ Charity contribution integration  
 
-## Expanding the ESLint configuration
+It is designed with a **modern SaaS UI/UX**, avoiding traditional golf platform aesthetics and focusing on engagement, simplicity, and scalability.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Features
+
+### 👤 User Features
+
+- 🔐 Secure Authentication (Signup/Login)
+- 📊 Enter and manage last 5 golf scores (Stableford format)
+- 💳 Subscription activation (Monthly/Yearly ready)
+- ❤️ Select charity & contribution %
+- 🎯 Participate in monthly draw
+- 🏆 View winnings & leaderboard
+- 📜 View draw history
+
+---
+
+### 👑 Admin Features
+
+- ⚡ Admin Dashboard (Dark SaaS UI)
+- 🎯 Generate & run draw system
+- 💰 Dynamic prize pool calculation
+- 📊 Analytics dashboard (users, revenue, winnings)
+- 🏆 Winner selection logic (3/4/5 match)
+- 📜 Draw history tracking
+- 🔐 Role-based access control
+
+---
+
+## 🧠 Core System Logic
+
+### 🎯 Draw Engine
+
+- Random 5-number generation (1–45)
+- Match system:
+  - 5 Match → Jackpot (40%)
+  - 4 Match → 35%
+  - 3 Match → 25%
+- Prize split among winners
+
+---
+
+### 📊 Score System
+
+- Users can store **only last 5 scores**
+- New score replaces oldest automatically
+- Range validation: **1–45**
+
+---
+
+### 💰 Prize Pool Logic
