@@ -12,7 +12,7 @@ This platform is a **subscription-driven web application** that combines:
 - 🎁 Monthly draw-based reward system  
 - ❤️ Charity contribution integration  
 
-It is designed with a **modern SaaS UI/UX**, avoiding traditional golf platform aesthetics and focusing on engagement, simplicity, and scalability.
+It is designed with a **modern SaaS UI/UX**, focusing on engagement, scalability, and clean user experience.
 
 ---
 
@@ -22,7 +22,7 @@ It is designed with a **modern SaaS UI/UX**, avoiding traditional golf platform 
 
 - 🔐 Secure Authentication (Signup/Login)
 - 📊 Enter and manage last 5 golf scores (Stableford format)
-- 💳 Subscription activation (Monthly/Yearly ready)
+- 💳 Subscription activation
 - ❤️ Select charity & contribution %
 - 🎯 Participate in monthly draw
 - 🏆 View winnings & leaderboard
@@ -64,3 +64,120 @@ It is designed with a **modern SaaS UI/UX**, avoiding traditional golf platform 
 ---
 
 ### 💰 Prize Pool Logic
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone Repo
+
+
+git clone <your-repo-link>
+cd golf-app
+
+
+---
+
+### 2️⃣ Install Dependencies
+
+
+npm install
+
+
+---
+
+### 3️⃣ Add Environment Variables
+
+Create `.env` file:
+
+
+VITE_SUPABASE_URL=your_url
+VITE_SUPABASE_ANON_KEY=your_key
+
+
+---
+
+### 4️⃣ Run Project
+
+
+npm run dev
+
+
+---
+
+## 👤 Test Credentials
+
+### 🔑 Admin
+- Email: admin@gmail.com  
+- Password: ******  
+
+### 👤 User
+- Signup normally  
+
+---
+
+## 📊 Highlights
+
+- Clean architecture  
+- Role-based access system  
+- Dynamic prize logic  
+- Modern SaaS UI  
+- Scalable design  
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone Repo
+
+
+git clone <your-repo-link>
+cd golf-app
+
+
+---
+
+### 2️⃣ Install Dependencies
+
+
+npm install
+
+
+---
+
+### 3️⃣ Add Environment Variables
+
+Create `.env` file:
+
+
+VITE_SUPABASE_URL=your_url
+VITE_SUPABASE_ANON_KEY=your_key
+
+
+---
+
+### 4️⃣ Run Project
+
+
+npm run dev
+
+
+---
+
+## 👤 Test Credentials
+
+### 🔑 Admin
+- Email: admin@gmail.com  
+- Password: ******  
+
+### 👤 User
+- Signup normally  
+
+---
+
+## 📊 Highlights
+
+- Clean architecture  
+- Role-based access system  
+- Dynamic prize logic  
+- Modern SaaS UI  
+- Scalable design  
